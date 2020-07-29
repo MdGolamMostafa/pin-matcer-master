@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">                
+                        <input   id="pinGeneratorInput" class="form-control" type="text" placeholder="- - - -">
+                        <button id="pinGeneratorBtn" class="generate-btn" onclick="pinGeneratorBtn()">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="btnInput" class="form-control" type="text"  placeholder="- - - -">
+                    <div class="numbers">
+                        <div class="calc-body" id="calculator" >
+                            <div class="calc-button-row" id="screen">
+                                <div id="seven"  class="button" value="7" onclick="seven()">7</div>
+                                <div id="eight"  class="button" value="8" onclick="eight()">8</div>
+                                <div id="nine"  class="button" value="9" onclick="nine()">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div   class="button" id="four" value="4" onclick="four()">4</div>
+                                <div class="button"  id="five" value="5" onclick="five()">5</div>
+                                <div class="button" id="six" value="6" onclick="six()">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" id="one" value="1" onclick="one()">1</div>
+                                <div class="button" id="two" value="2" onclick="two()">2</div>
+                                <div class="button" id="three" value="3" onclick="three()">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button" id="left" value.slice(0,-1)  onclick="left()"><</div>
+                                <div class="button" id="zero" value="0" onclick="zero()">0</div>
+                                <div class="button" id="c" value=''  onclick="c()">C</div>
+                            </div>
+                            <div>                                
+                                <button  type="button" class="submit-btn" id="submitBtnId" onclick="submitBtn()" >Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section" >
+            <p class="notify" id="crossId">❌ Pin Didn't Match, Please try again</p>
+            <p class="notify" id="successId">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+    <script>
+            function pinGeneratorBtn(){
+                let pinGenerator= document.getElementById("pinGeneratorInput").innerHTML =  Math.floor(1000 + Math.random() * 9000);
+                let pinGeneratorInput = document.getElementById('pinGeneratorInput');
+                pinGeneratorInput.value = pinGenerator;
+            }
+
+            function seven(){
+                let btnValue = document.getElementById("seven").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '7';
+            }
+
+            function eight(){
+                let btnValue = document.getElementById("eight").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '8';
+            }
+
+            function nine(){
+                let btnValue = document.getElementById("nine").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '9';
+            }
+
+            
+            function four(){
+                let btnValue = document.getElementById("four").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '4';
+            }
+
+            function five(){
+                let btnValue = document.getElementById("five").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '5';
+            }
+
+            function six(){
+                let btnValue = document.getElementById("six").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '6';
+            }
+
+            function one(){
+                let btnValue = document.getElementById("one").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '1';
+            }
+
+            function two(){
+                let btnValue = document.getElementById("two").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '2';
+            }
+
+            function three(){
+                let btnValue = document.getElementById("three").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '3';
+            }
+
+            function left(){
+                let btnValue = document.getElementById("left").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value = btnInput.value.slice(0,-1);
+            }
+
+            function zero(){
+                let btnValue = document.getElementById("zero").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value += '0';
+            }
+
+            function c(){
+                let btnValue = document.getElementById("c").innerHTML;
+                let btnInput = document.getElementById('btnInput');
+                btnInput.value = '';
+            }
+
+            function submitBtn(){
+
+                if ( btnInput.value == pinGeneratorInput.value) {
+                    const success = document.getElementById('successId');
+                success.style.display="block"; 
+                const cross = document.getElementById('crossId');
+                cross.style.display="none";
+                }
+                
+                else{
+                const cross = document.getElementById('crossId');
+                cross.style.display="block";
+                const success = document.getElementById('successId');
+                success.style.display="none"; 
+                }
+                              
+            }
+
+    // function submitBtn() {
+    //             let cross = document.getElementById('crossId');
+    //             cross.style.display="block";
+    //             // console.log('clicked')
+            
+    //         }
+
+
+    </script>
+</body>
+</html>
