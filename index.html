@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,28 +23,28 @@
                     <div class="numbers">
                         <div class="calc-body" id="calculator" >
                             <div class="calc-button-row" id="screen">
-                                <div id="seven"  class="button" value="7" onclick="seven()">7</div>
-                                <div id="eight"  class="button" value="8" onclick="eight()">8</div>
-                                <div id="nine"  class="button" value="9" onclick="nine()">9</div>
+                                <div   class="button" id="7" onclick="btnInputFunction(7)">7</div>
+                                <div   class="button" id="8" onclick="btnInputFunction(8)">8</div>
+                                <div   class="button" id="9" onclick="btnInputFunction(9)">9</div>
                             </div>
                             <div class="calc-button-row">
-                                <div   class="button" id="four" value="4" onclick="four()">4</div>
-                                <div class="button"  id="five" value="5" onclick="five()">5</div>
-                                <div class="button" id="six" value="6" onclick="six()">6</div>
+                                <div class="button" id="4" onclick="btnInputFunction(4)">4</div>
+                                <div class="button" id="5" onclick="btnInputFunction(5)">5</div>
+                                <div class="button" id="6" onclick="btnInputFunction(6)">6</div>
                             </div>
                             <div class="calc-button-row">
-                                <div class="button" id="one" value="1" onclick="one()">1</div>
-                                <div class="button" id="two" value="2" onclick="two()">2</div>
-                                <div class="button" id="three" value="3" onclick="three()">3</div>
+                                <div class="button" id="1" onclick="btnInputFunction(1)">1</div>
+                                <div class="button" id="2" onclick="btnInputFunction(2)">2</div>
+                                <div class="button" id="3" onclick="btnInputFunction(3)">3</div>
                             </div>
                             <div class="calc-button-row">
                                 <div class="button" id="left" value.slice(0,-1)  onclick="left()"><</div>
-                                <div class="button" id="zero" value="0" onclick="zero()">0</div>
+                                <div class="button" id="0" onclick="btnInputFunction(0)">0</div>
                                 <div class="button" id="c" value=''  onclick="c()">C</div>
                             </div>
                             <div>                                
                                 <button  type="button" class="submit-btn" id="submitBtnId" onclick="submitBtn()" >Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <p class="action-left" ><span id="tryId">3</span> try left</p>
                             </div>
                     </div>
                 </div>
@@ -61,59 +62,8 @@
                 pinGeneratorInput.value = pinGenerator;
             }
 
-            function seven(){
-                let btnValue = document.getElementById("seven").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '7';
-            }
-
-            function eight(){
-                let btnValue = document.getElementById("eight").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '8';
-            }
-
-            function nine(){
-                let btnValue = document.getElementById("nine").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '9';
-            }
-
-            
-            function four(){
-                let btnValue = document.getElementById("four").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '4';
-            }
-
-            function five(){
-                let btnValue = document.getElementById("five").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '5';
-            }
-
-            function six(){
-                let btnValue = document.getElementById("six").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '6';
-            }
-
-            function one(){
-                let btnValue = document.getElementById("one").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '1';
-            }
-
-            function two(){
-                let btnValue = document.getElementById("two").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '2';
-            }
-
-            function three(){
-                let btnValue = document.getElementById("three").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '3';
+            function btnInputFunction(id) {
+                document.getElementById('btnInput').value += document.getElementById(id).innerText;
             }
 
             function left(){
@@ -122,43 +72,42 @@
                 btnInput.value = btnInput.value.slice(0,-1);
             }
 
-            function zero(){
-                let btnValue = document.getElementById("zero").innerHTML;
-                let btnInput = document.getElementById('btnInput');
-                btnInput.value += '0';
-            }
-
             function c(){
                 let btnValue = document.getElementById("c").innerHTML;
                 let btnInput = document.getElementById('btnInput');
                 btnInput.value = '';
             }
 
-            function submitBtn(){
+            function submitBtn()
+                {
+                    if (pinGeneratorInput.value=='') {
+                        alert('Please press Pin Generator button and match random pin.');
+                    }
+                    else if (btnInput.value=='') {
+                        alert('Please insert value and match random pin.');
+                    }
+                    else
+                    {
+                        if (btnInput.value == pinGeneratorInput.value) {
+                                document.getElementById('successId').style.display="block";                
+                                document.getElementById('crossId').style.display="none";               
+                        }               
+                        else{
+                                document.getElementById('crossId').style.display="block";
+                                document.getElementById('successId').style.display="none"; 
+                                let tryAction = document.getElementById('tryId').innerText;
+                                let tryActionCount = tryAction-1;
 
-                if ( btnInput.value == pinGeneratorInput.value) {
-                    const success = document.getElementById('successId');
-                success.style.display="block"; 
-                const cross = document.getElementById('crossId');
-                cross.style.display="none";
-                }
-                
-                else{
-                const cross = document.getElementById('crossId');
-                cross.style.display="block";
-                const success = document.getElementById('successId');
-                success.style.display="none"; 
-                }
-                              
-            }
-
-    // function submitBtn() {
-    //             let cross = document.getElementById('crossId');
-    //             cross.style.display="block";
-    //             // console.log('clicked')
-            
-    //         }
-
+                        if (tryActionCount < 0) {         
+                                document.getElementById("submitBtnId").disabled = true;   
+                                document.getElementById('submitBtnId').style.backgroundColor="red";                        
+                                alert('please try another time.');                                                                  
+                                return 0;
+                                }
+                            document.getElementById('tryId').innerText = tryActionCount;                             
+                        }
+                    }
+                }            
 
     </script>
 </body>
