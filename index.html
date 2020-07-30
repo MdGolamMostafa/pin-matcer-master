@@ -81,7 +81,7 @@
             function submitBtn()
                 {
                     if (pinGeneratorInput.value=='') {
-                        alert('Please press Pin Generator button and match random pin.');
+                        alert('Please press Pin Generator button and match random pin .');
                     }
                     else if (btnInput.value=='') {
                         alert('Please insert value and match random pin.');
@@ -96,15 +96,13 @@
                                 document.getElementById('crossId').style.display="block";
                                 document.getElementById('successId').style.display="none"; 
                                 let tryAction = document.getElementById('tryId').innerText;
-                                let tryActionCount = tryAction-1;
-
-                        if (tryActionCount < 0) {         
-                                document.getElementById("submitBtnId").disabled = true;   
-                                document.getElementById('submitBtnId').style.backgroundColor="red";                        
-                                alert('please try another time.');                                                                  
-                                return 0;
-                                }
-                            document.getElementById('tryId').innerText = tryActionCount;                             
+                                tryActionCount = tryAction-1;
+                                document.getElementById('tryId').innerText = tryActionCount;
+                        if (tryActionCount <= 0) {                                     
+                                document.getElementById('submitBtnId').style.backgroundColor="red"; 
+                                document.getElementById("submitBtnId").disabled = true;                                
+                                alert('please try another time.');                                                               
+                                }                             
                         }
                     }
                 }            
