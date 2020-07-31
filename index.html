@@ -98,6 +98,8 @@
                                 let tryAction = document.getElementById('tryId').innerText;
                                 tryActionCount = tryAction-1;
                                 document.getElementById('tryId').innerText = tryActionCount;
+                                let btnInput = document.getElementById('btnInput');
+                                btnInput.value = '';
                         if (tryActionCount <= 0) {                                     
                                 document.getElementById('submitBtnId').style.backgroundColor="red"; 
                                 document.getElementById("submitBtnId").disabled = true;                                
